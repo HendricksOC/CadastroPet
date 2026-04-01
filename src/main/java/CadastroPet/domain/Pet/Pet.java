@@ -4,25 +4,25 @@ public class Pet {
     private String id;
     private String nome;
     private String sobrenome;
-    private int idade;
+    private String idade;
     private Sexo sexo;
 
 
-    public Pet(String nome, String sobrenome, int idade, Sexo sexo) {
+    public Pet(String nome, String sobrenome, String idade, Sexo sexo) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.idade = idade;
         this.sexo = sexo;
     }
 
-    public Pet(String id, String nome, String sobrenome, int idade) {
+    public Pet(String id, String nome, String sobrenome, String idade) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.idade = idade;
     }
 
-    public Pet(String id, String nome, String sobrenome, int idade, Sexo sexo) {
+    public Pet(String id, String nome, String sobrenome, String idade, Sexo sexo) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -60,11 +60,11 @@ public class Pet {
         this.sobrenome = sobrenome;
     }
 
-    public void setIdade(int idade) {
+    public void setIdade(String idade) {
         this.idade = idade;
     }
 
-    public int getIdade() {
+    public String getIdade() {
         return idade;
     }
 

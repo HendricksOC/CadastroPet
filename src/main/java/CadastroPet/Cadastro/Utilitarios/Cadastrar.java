@@ -14,26 +14,19 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Cadastrar {
+
     public  void CadastrarPet() {
         Scanner sc = new Scanner(System.in);
         boolean menuCadastro = true;
         System.out.println("Cadastrando Pet");
         while(menuCadastro){
-            try {
-
-            } catch (IllegalArgumentException e){
-
-            }
-             System.out.println("Nome do Pet: ");
-             String nome = sc.nextLine();
-             System.out.println("Gerando Id...");
-             System.out.println("Sobrenome: ");
-             String sobrenome = sc.nextLine();
+             String nome = lerEntrada(sc , "Nome Pet ");
+             String sobrenome = lerEntrada(sc , "Sobrenome Pet");
+            System.out.println("Gerando Id...");
              String idN = String.valueOf(nome.hashCode());String idS = String.valueOf(sobrenome.hashCode());
              String id = idN+idS;
-             System.out.println("Idade: ");
-             int idade = sc.nextInt();
-             sc.nextLine();
+             IdadePet idadePet = lerIdadePet(sc);
+             String idade = idadePet.valor + " " + idadePet.unidade;
              System.out.println("Sexo do Pet: (FEMEA) OU (MACHO)");
              String sexoEs = sc.nextLine().toUpperCase().trim();
              Sexo sexo = null;
@@ -75,5 +68,58 @@ public class Cadastrar {
                 throw new RuntimeException("Erro ao cadastrar o pet" + e);
             }
         }
+        public static boolean validarNome(String texto){
+            if(texto.trim().isEmpty()) {
+                return false;
+            }
+            return texto.matches("^[a-zA-ZÀ-ÖØ-öø-ÿ\\s]+$");
 
-    }
+        }
+
+        public static String lerEntrada(Scanner sc , String campo){
+            System.out.println(campo + ": ");
+            String entrada = sc.nextLine();
+            while(!validarNome(entrada)){
+                System.out.println("não pode haver caracteres especiais ou numero");
+                System.out.print("Digite novamente: ");
+                entrada = sc.nextLine();
+            } return entrada;
+
+        }
+        public static IdadePet lerIdadePet(Scanner sc){
+            while (true){
+                System.out.println("Deseja cadastrar idade em ANOS ou MESES?");
+                String opcao = sc.nextLine().toUpperCase().trim();
+                if (opcao.equals("MESES")){
+                    int meses = lerInteiro(sc, "Digite a quantidade em meses" , 1,12);
+                    return new IdadePet(meses, "Meses");
+                }
+                if (opcao.equals("ANOS")){
+                    int anos = lerInteiro(sc , "Digite a quantidade em anos" , 1 , 30);
+                    return new IdadePet(anos , "Anos");
+
+                }else {
+                    System.out.println("Opção inválida! Digite apenas 'ANOS' ou 'MESES'.");
+            }}
+
+        }
+        public record IdadePet(int valor, String unidade) {}
+        public static int lerInteiro(Scanner sc , String mensagem, int min , int max){
+            while (true){
+                try {
+                    System.out.println(mensagem + " (" + min + " a " + max + "): ");
+                    int valor = Integer.parseInt(sc.nextLine());
+
+                    if (valor >= min && valor <= max) {
+                        return valor;
+                    }
+                    System.out.println("Erro: O valor deve estar entre " + min + " e " + max);
+
+                } catch (NumberFormatException e){
+                    System.out.println("ERRO: digite um numero valido");
+                }
+            }
+        }
+
+}
+
