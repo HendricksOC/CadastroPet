@@ -23,8 +23,6 @@ public class Cadastrar {
              String nome = lerEntrada(sc , "Nome Pet ");
              String sobrenome = lerEntrada(sc , "Sobrenome Pet");
             System.out.println("Gerando Id...");
-             String idN = String.valueOf(nome.hashCode());String idS = String.valueOf(sobrenome.hashCode());
-             String id = idN+idS;
              IdadePet idadePet = lerIdadePet(sc);
              String idade = idadePet.valor + " " + idadePet.unidade;
              System.out.println("Sexo do Pet: (FEMEA) OU (MACHO)");
@@ -37,7 +35,7 @@ public class Cadastrar {
                  System.out.println("Argumento invalido");
                  e.printStackTrace();
              }
-             Pet petCadastrado = new Pet(id,nome, sobrenome , idade, sexo);
+             Pet petCadastrado = new Pet(nome, sobrenome , idade, sexo);
              System.out.println(petCadastrado);
             EscreverPet(petCadastrado);
             System.out.println("Pet Cadastrado com sucesso!");
@@ -46,10 +44,12 @@ public class Cadastrar {
         }
 
         public static void EscreverPet(Pet pet){
-            Path path = Paths.get("C:\\Users\\hendr\\IdeaProjects\\CadastroPet\\DadosPet");
+            Path path = Paths.get("/home/hendrick/IdeaProjects/CadastroPet/DadosPet");
             try {
-                Files.createDirectories(path);
-                System.out.println("Diretorio criado com sucesso");
+                if (!Files.exists(path)){
+                    Files.createDirectories(path);
+                    System.out.println("Diretorio criado com sucesso");
+                }
 
             }catch (IOException e){
                 System.out.println("Falha ao criar diretorio");

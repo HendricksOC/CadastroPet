@@ -2,6 +2,7 @@ package CadastroPet.tests;
 
 import CadastroPet.Cadastro.Utilitarios.BuscarPet;
 import CadastroPet.Cadastro.Utilitarios.Cadastrar;
+import CadastroPet.Cadastro.Utilitarios.GeneratorPets;
 
 import java.util.Scanner;
 
@@ -11,12 +12,15 @@ public class main {
     static void main() {
         Cadastrar cadastrar = new Cadastrar();
         BuscarPet buscarPet = new BuscarPet();
+        GeneratorPets generatorPets = new GeneratorPets();
         Scanner sc = new Scanner(System.in);
         System.out.println("Sistema de Cadastro de pet via linha de comando");
         System.out.println("O que deseja fazer Escolha uma das opções: ");
         System.out.println("[1] Cadastrar Pet");
         System.out.println("[2] Buscar Pet");
         System.out.println("[3] Alterar Pet");
+        System.out.println("[8] Gerar Pets");
+
         boolean menu = true;
         while (menu){
             int opcao = sc.nextInt();
@@ -29,7 +33,12 @@ public class main {
                     buscarPet.ListandoPet();
                     break;
                 case 3:
+                    System.out.println("Pets Cadastrados no Sistema");
+                    buscarPet.ListandoPet();
                     buscarPet.AlterarPet();
+                    break;
+                case 8:
+                    generatorPets.GenPets(40);
                     break;
             }
 

@@ -12,6 +12,7 @@ target/
 *.iws
 *.iml
 *.ipr
+/home/hendrick/IdeaProjects/CadastroPet/DadosPet
 
 ### Eclipse ###
 .apt_generated
